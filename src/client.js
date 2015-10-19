@@ -1,3 +1,3 @@
 require('./client.css');
 
-console.log('kvaak sanoo ankka!');
+console.log('Kvaak, sanoo ankka!');
