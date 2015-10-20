@@ -10,10 +10,6 @@ function getTussit() {
     });
 }
 
-const tussit = getTussit();
-
-tussit.then((data) => console.log(data));
-
 const HelloWorld = React.createClass({
     render: function () {
         return (
@@ -54,8 +50,8 @@ const HelloWorldApp = React.createClass({
         return (
             <div>
                 <h1>Lusso</h1>
-                {names.map(name =>
-                    <HelloWorld name={name} />
+                {names.map((name, i) =>
+                    <HelloWorld key={i} name={name} />
                 )}
 
             <Counterizer
