@@ -4,5 +4,23 @@ h1 {
     color: $red
 }
 
+.tussi {
+    padding: 20px 0;
+    background-color: pink;
 
+    button {
+        padding: 10px;
+    }
+}
 
+.megatussi {
+    background-color: cyan;
+    color: turquoise;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    font-size: 100px;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}
