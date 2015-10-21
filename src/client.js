@@ -3,6 +3,8 @@ import './client.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
+import { Router, Route, Link, IndexRoute } from 'react-router'
+
 
 function getTussit() {
     return axios.get('/api/tussi').then((response) => {
@@ -14,7 +16,9 @@ const HelloWorld = React.createClass({
     render: function () {
         return (
             <div>
-                Hello {this.props.name}
+                <Link to={`/hello/${this.props.name}`}>
+                    Hello {this.props.name}
+                </Link>
             </div>
         );
     }
@@ -22,10 +26,12 @@ const HelloWorld = React.createClass({
 
 const Counterizer = React.createClass({
     render: function () {
+        const { count, onIncrementCounter } = this.props;
+
         return (
             <div className="tussi">
-                {this.props.count}
-                <button onClick={this.props.onIncrementCounter}>
+                {count}
+                <button onClick={onIncrementCounter}>
                     Lisää!
                 </button>
             </div>
@@ -43,25 +49,42 @@ const MegaCounterizer = React.createClass({
     }
 })
 
-const HelloWorldApp = React.createClass({
-    render: function() {
-        const names = this.state.names;
-
+const MainPage = React.createClass({
+    render: function () {
+        const { count, names, onIncrementCounter } = this.props;
         return (
             <div>
-                <h1>Lusso</h1>
+
                 {names.map((name, i) =>
                     <HelloWorld key={i} name={name} />
                 )}
 
-            <Counterizer
-                count={this.state.count}
-                onIncrementCounter={this.incrementCounter} />
+                <Counterizer
+                    count={this.props.count}
+                    onIncrementCounter={this.props.onIncrementCounter} />
 
-            <MegaCounterizer
-                count={this.state.count}
-                onIncrementCounter={this.incrementCounter} />
+                <MegaCounterizer
+                    count={this.props.count}
+                    onIncrementCounter={this.props.onIncrementCounter} />
 
+            </div>
+        );
+    }
+})
+
+const HelloWorldApp = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <h1>Lusso</h1>
+                {this.props.children && React.cloneElement(
+                    this.props.children,
+                    {
+                        names: this.state.names,
+                        count: this.state.count,
+                        onIncrementCounter: this.incrementCounter
+                    }
+                )}
             </div>
         );
     },
@@ -70,7 +93,6 @@ const HelloWorldApp = React.createClass({
         return {
             count: 0,
             names: []
-
         }
     },
 
@@ -87,11 +109,40 @@ const HelloWorldApp = React.createClass({
             count: this.state.count + 1
         });
     }
+
+
 });
 
+const Greeter = React.createClass({
+    render: function () {
+        console.log(this.props);
+        const name = this.props.params.name;
+
+        return (
+            <div>
+                <h2>
+                    Hellooo {name}
+                </h2>
+                <Link to="/">
+                    Takaisin
+                </Link>
+            </div>
+        );
+    }
+})
+
+
+const routes = (
+    <Router>
+        <Route path="/" component={HelloWorldApp}>
+            <IndexRoute component={MainPage}/>
+            <Route path="/hello/:name" component={Greeter}/>
+        </Route>
+    </Router>
+);
 
 
 ReactDOM.render(
-    <HelloWorldApp />,
+    routes,
     document.getElementById('app')
 );

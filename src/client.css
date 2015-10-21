@@ -24,3 +24,8 @@ h1 {
     height: 150px;
     text-align: center;
 }
+
+.greeter {
+    background-color: #98798a;
+    font-size: 200px;
+}
