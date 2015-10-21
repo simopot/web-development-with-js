@@ -4,15 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router'
 
-import HelloWorldApp from './components/HelloWorldApp';
-import MainPage from './components/MainPage';
-import Greeter from './components/Greeter';
+import BulletinBoardApp from './components/BulletinBoardApp';
+//import MainPage from './components/MainPage';
 
 const routes = (
     <Router>
-        <Route path="/" component={HelloWorldApp}>
-            <IndexRoute component={MainPage}/>
-            <Route path="/hello/:name" component={Greeter}/>
+        <Route path="/" component={BulletinBoardApp}>
         </Route>
     </Router>
 );

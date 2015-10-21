@@ -1,8 +1,4 @@
 import React from 'react';
-import Counterizer from './Counterizer';
-import MegaCounterizer from './MegaCounterizer';
-import HelloWorld from './HelloWorld';
-
 
 const MainPage = React.createClass({
     render: function () {
