@@ -5,3 +5,39 @@
 .panel-title {
     font-size: 14px;
 }
+
+.panel {
+	margin-bottom: 10px;
+}
+
+.panel-body {
+	padding: 5px 15px;
+}
+
+.fadeInTransition-enter {
+  opacity: 0.01;
+}
+
+.fadeInTransition-enter.fadeInTransition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fadeInTransition-leave {
+  opacity: 1;
+}
+
+.fadeInTransition-leave.fadeInTransition-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.comments {
+	margin-top: 1em;
+}
+
+.messageControls {
+	display: inline;
+	position: absolute;
+	right: 40px;
+}
