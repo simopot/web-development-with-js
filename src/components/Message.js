@@ -5,12 +5,12 @@ import Comment from './Comment'
 export default React.createClass({
     render: function () {
         const { message, comments } = this.props;
-
+        //const { messageText, messageTimestamp }
         return (
             <Panel bsStyle="info" header={ <div><Icon name="calendar" /> 12.12.2012 <Icon name="clock-o" /> 12:12 <Icon name="user" /> Simo <Icon name="pencil" /> <Icon name="trash-o" /></div>}>
-
-				{message}
-
+                <div>
+				    {message}
+                </div>
                 {comments.map((comment, i) =>
                     <Comment comment={comment}/>
                 )}

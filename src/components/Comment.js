@@ -8,7 +8,9 @@ export default React.createClass({
 		//console.log(comments);
         return (
             <Panel bsStyle="warning" header={ <div><Icon name="calendar" /> {date} <Icon name="clock-o" /> {time} <Icon name="user" /> Simo</div>}>
-                {text}
+                <div>
+                    {text}
+                </div>
             </Panel>
         );
     }
