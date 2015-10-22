@@ -23,37 +23,41 @@ export default React.createClass({
             }
         ];
 
-        //console.log(comments);
+        console.log(comments);
+
         return (
             <div>
                 <h1>Ilmoitustaulu</h1>
                 <Grid>
-                <Row>
-                <Col sm={6}>
-                <Panel bsStyle="success" header="Uusi viesti">
-                    <Input type="textarea" />
-                    <Input type="select" addonBefore={<Icon name="user" />}>
-                        <option></option>
-                        <option>Simo</option>
-                        <option>foo</option>
-                        <option>bar</option>
-                    </Input>
-                    <Button bsStyle="success" bsSize="medium">
-                        <Icon name="floppy-o" size="lg" /> Tallenna
-                    </Button>
-                </Panel>
-                
-                <Message message="jotain" comments="" />
+                    <Row>
+                        <Col sm={6}>
+                            <Panel bsStyle="success" header={<div className="panelHeader">Uusi viesti</div>}>
+                                <form className="form-inline">
+                                <Input type="textarea" />
+                                { " " }
+                                <Input type="select" bsSize="small" addonBefore={<Icon name="user" />}>
+                                    <option></option>
+                                    <option>Simo</option>
+                                    <option>foo</option>
+                                    <option>bar</option>
+                                </Input>
+                                { " " }
+                                <Button bsStyle="success" bsSize="small">
+                                    <Icon name="comment" size="lg" />
+                                </Button>
+                                </form>
+                            </Panel>
 
-                {messages.map((message, i) =>
-                    <Message key={i} message={message} comments={comments} />
-                )}
-                </Col>
-                <Col sm={6}>
-                a
-                </Col>
-                
-                </Row>
+                        <Message message="jotain" comments={[]} />
+                            {messages.map((message, i) =>
+                                <Message key={i} message={message} comments={comments} />
+                            )}
+                        </Col>
+
+                        <Col sm={6}>
+                            a
+                        </Col>
+                    </Row>
                 </Grid>
             </div>
         );
