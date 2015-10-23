@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from 'react-fa';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { default as I, List, Map, Range, Repeat } from 'immutable';
+import { List, Map } from 'immutable';
 import moment from 'moment';
 import uuid from 'uuid';
 
@@ -37,30 +37,38 @@ export default React.createClass({
                 <h1>Ilmoitustaulu</h1>
                 <Grid>
                     <Row>
-                        <Col sm={6}>
-                            <Panel bsStyle="success" header={<div className="panelHeader">Uusi viesti</div>}>
-                                <MessageForm />
-                            </Panel>
-                            
-                            <ReactCSSTransitionGroup transitionName="fadeInTransition" transitionAppear={false} transitionAppearTimeout={500}>
+                        <Col sm={12}>
+                            <MessageForm />
+
+                            <ReactCSSTransitionGroup
+                                transitionName="fadeInTransition"
+                                transitionAppear={false}
+                                transitionAppearTimeout={500}
+                                transitionEnterTimeout={500}
+                                transitionLeaveTimeout={500}>
+
                                 {messages
-                                    .sortBy(message => message.timestamp)
+                                    .sortBy((message) => {
+                                        if (!message.comments) {
+                                            return message.timestamp;
+                                        }
+                                        return Map(message.comments).map(comment => comment.timestamp).max();
+
+                                    })
                                     .reverse()
                                     .map((message, messageUuid) =>
-                                            <Message
-                                                key={messageUuid} 
-                                                messageUuid={messageUuid}
-                                                text={message.text}
-                                                timestamp={message.timestamp}
-                                                user={message.user}
-                                            />
+                                        <Message
+                                            key={messageUuid}
+                                            messageUuid={messageUuid}
+                                            text={message.text}
+                                            timestamp={message.timestamp}
+                                            user={message.user}
+                                            comments={message.comments} />
+                                )}
 
-                                    )}
                             </ReactCSSTransitionGroup>
-                        </Col>
 
-                        <Col sm={6}>
-                            
+
                         </Col>
                     </Row>
                 </Grid>
