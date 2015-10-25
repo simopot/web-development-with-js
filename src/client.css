@@ -11,7 +11,7 @@
 }
 
 .panel-body {
-	padding: 5px 15px;
+	padding: 5px 20px;
 }
 
 .fadeInTransition-enter {
@@ -32,12 +32,26 @@
   transition: opacity 300ms ease-in;
 }
 
+.messageText {
+	white-space: pre;
+}
+
 .comments {
 	margin-top: 1em;
 }
 
 .messageControls {
-	display: inline;
+	position: absolute;
+	right: 20px;
+}
+
+.commentControls {
 	position: absolute;
 	right: 40px;
 }
+
+.messageControl {
+		margin-right: 5px;
+	}
+
+

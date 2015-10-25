@@ -9,7 +9,7 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: './',
         filename: 'client.[hash].js'
     },
     module: {

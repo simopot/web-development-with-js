@@ -1,10 +1,11 @@
 import React from 'react';
 import Icon from 'react-fa';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Alert, Button } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { List, Map } from 'immutable';
+import { Map } from 'immutable';
 import moment from 'moment';
 import uuid from 'uuid';
+
 
 import api from '../api';
 import Message from './Message';
@@ -15,25 +16,32 @@ import MessageForm from './MessageForm';
 export default React.createClass({
     getInitialState: function() {
         return {
-            users: List(),
             messages: Map()
         }
     },
 
     componentDidMount: function() {
-        api.myFirebaseRef.on('value', snapshot => {
-                const val = snapshot.val();
+        api.myFirebaseRef
+            .child('messages')
+            .on('value', snapshot => {
                 this.setState({
-                    messages: Map(val.messages)
+                    messages: Map(snapshot.val())
                 });
         });
     },
 
+  
+
+
     render: function() {
         const { messages } = this.state;
 
+
+
+
         return (
             <div>
+        
                 <h1>Ilmoitustaulu</h1>
                 <Grid>
                     <Row>
@@ -53,7 +61,6 @@ export default React.createClass({
                                             return message.timestamp;
                                         }
                                         return Map(message.comments).map(comment => comment.timestamp).max();
-
                                     })
                                     .reverse()
                                     .map((message, messageUuid) =>
@@ -67,8 +74,6 @@ export default React.createClass({
                                 )}
 
                             </ReactCSSTransitionGroup>
-
-
                         </Col>
                     </Row>
                 </Grid>
